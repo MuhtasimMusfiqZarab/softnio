@@ -5,15 +5,15 @@ import "./Dashlite.css";
 import "./Message.css";
 
 import Parent from "./components/Parent";
-import WholeMessage from "./components/WholeMessage";
 
 function App() {
+  //initializing selected item
+
   return (
     <div className="App">
       <div className="nk-body">
-        <div className="nk-msg">
+        <div>
           <Parent />
-          <WholeMessage />
         </div>
       </div>
     </div>

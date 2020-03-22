@@ -1,43 +1,20 @@
 import React, { Component } from "react";
-// import Active from "./Active";
-// import Closed from "./Closed";
-// import Starred from "./Starred";
-// import All from "./All";
-import WholeMessage from "./WholeMessage";
 
 class MessageAside extends Component {
-  state = {};
-
-  //handle click for each menu item above
-  handleClick = item => {
-    //run parent function for activate clicking
-    console.log("asdfffffffff");
-    console.log("Here is the item", item);
-    this.props.tabActive(item);
-    console.log("After Change tab item", this.props.isActive);
-  };
-
-  passingProp(item) {
-    console.log("Item  received for passing", item);
-
-    // return <WholeMessage />;
-
-    //from here pass the prop to whle message
-  }
-
   //showing specific user for active click
   showUsers(sortedObject) {
-    console.log(sortedObject);
-
     return (
       <ul>
         {sortedObject.map(ele => {
           return (
             <li
               key={ele.avator.toString()}
-              onClick={() => this.passingProp(ele)}
+              onClick={() => this.props.initSelectedItem(ele)}
             >
-              <div className="nk-msg-item current" data-msg-id="1">
+              <div
+                className={`nk-msg-item ${ele.isActive}`}
+                data-msg-id={ele.id}
+              >
                 <div className="nk-msg-media user-avatar">
                   <span>{ele.avator}</span>
                 </div>
@@ -77,20 +54,13 @@ class MessageAside extends Component {
     );
   }
 
-  //make the top menu bar active if pressed
-  handlePress() {
-    console.log("The top bar is pressed");
-  }
-
   render() {
     //sorting the menu
     const sorted = []
       .concat(this.props.menuBarStatus)
       .sort((a, b) => a.item > b.item);
 
-    // console.log(sorted);
-
-    //sorted accooording to active or not
+    //sorting the profiles
     let sortedObject;
     if (this.props.isActive == "" || this.props.isActive == "All") {
       sortedObject = []
@@ -103,21 +73,20 @@ class MessageAside extends Component {
         .sort((a, b) => a.userName > b.userName);
     }
 
-    //then filter accorging to msg status
-
-    // console.log(sortedObject);
+    //make the 1st ones className current and push it to the active object
+    console.log("This is firts item", sortedObject[0]);
+    // this.props.firstSelectedItem(sortedObject[0]);
 
     return (
-      // topbar menu------------------------------------
       <div>
         <div className="msg-aside">
           <div className="nk-msg-nav ">
             <ul className="nk-msg-menu ">
               {sorted.map((ele, index) => (
                 <li
-                  onClick={() => this.handleClick(ele.item)}
-                  key={ele.item.toString()}
-                  className={`nk-msg-menu-item ${ele.state} current`}
+                  onClick={() => this.props.tabActive(ele.item)}
+                  // key={ele.item.toString()}
+                  className={`nk-msg-menu-item ${ele.state}`}
                 >
                   <a>{ele.item}</a>
                 </li>
@@ -126,13 +95,13 @@ class MessageAside extends Component {
             {/*Topbar menu end */}
             {/* menu  */}
             <div
-              className="search-wrap "
+              // className="search-wrap "
               data-search="search"
               // style={{ width: 100 }}`
             >
               <div className="search-content">
                 <a
-                  href="#"
+                  href=""
                   className="search-back btn btn-icon toggle-search"
                   data-target="search"
                 >

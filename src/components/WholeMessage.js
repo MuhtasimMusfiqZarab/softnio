@@ -3,13 +3,13 @@ import React, { Component } from "react";
 class WholeMessage extends Component {
   state = {};
   render() {
+    const { item: el } = this.props;
+    console.log("This is el", el);
     return (
       <div>
         <div className="nk-msg-body bg-white profile-shown current">
           <div className="nk-msg-head">
-            <h4 className="title d-none d-lg-block">
-              Unable to select currency when order
-            </h4>
+            <h4 className="title d-none d-lg-block">{el.title}</h4>
             <div className="nk-msg-head-meta">
               <div className="d-none d-lg-block">
                 <ul className="nk-msg-tags">
@@ -82,7 +82,7 @@ class WholeMessage extends Component {
           msg rep
           <div className="nk-msg-reply nk-reply" data-simplebar>
             <div className="nk-msg-head py-4 d-lg-none">
-              <h4 className="title">Unable to select currency when order</h4>
+              <h4 className="title">{el.title}</h4>
               <ul className="nk-msg-tags">
                 <li>
                   <span className="label-tag">
@@ -98,20 +98,16 @@ class WholeMessage extends Component {
                   <div className="user-avatar sm bg-blue">
                     <span>AB</span>
                   </div>
-                  <div className="user-name">Abu Bin Ishtiyak</div>
+                  <div className="user-name">{el.name}</div>
                 </div>
-                <div className="date-time">14 Jan, 2020</div>
+                <div className="date-time">{el.date}</div>
               </div>
               <div className="nk-reply-body">
                 <div className="nk-reply-entry entry">
                   <p>Hello team,</p>
+                  <p>{el.body}</p>
                   <p>
-                    I am facing problem as i can not select currency on buy
-                    order page. Can you guys let me know what i am doing doing
-                    wrong? Please check attached files.
-                  </p>
-                  <p>
-                    Thank you <br /> Ishityak
+                    Thank you <br /> {el.name}
                   </p>
                 </div>
                 <div className="attach-files">
